@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using RemD.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -33,15 +34,39 @@ namespace RemD.ViewModels
 
             if(File.Exists(fileName))
             {
-                Connections.RootCategories.Clear();
-                Connections = JsonConvert.DeserializeObject<ConnectionsModel>(File.ReadAllText(fileName));
+                Connections.RootCategories = JsonConvert.DeserializeObject<ObservableCollection<Category>>(File.ReadAllText(fileName));
             }
         }
 
         public void Save()
         {
             string fileName = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "connections.json");
-            File.WriteAllText(fileName, JsonConvert.SerializeObject(Connections));
+            File.WriteAllText(fileName, JsonConvert.SerializeObject(Connections.RootCategories));    
+        }
+
+        public void Open(Connection conn)
+        {
+            IoC.Get<ShellViewModel>().Open(conn);
+        }
+
+
+        public void AddNewConnection()
+        {
+            NewConnectionViewModel newConnVM = new NewConnectionViewModel(Connections.RootCategories);
+
+            bool result = IoC.Get<IWindowManager>().ShowDialog(newConnVM).Value;
+
+            if (result)
+            {
+                Connection connection = new Connection();
+                connection.Address = newConnVM.Address;
+                connection.Name = newConnVM.Name;
+                newConnVM.SelectedCategory.Connections.Add(connection);
+            }
+        }
+
+        public void AddNewCategory()
+        {
             
         }
     }

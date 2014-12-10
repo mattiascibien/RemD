@@ -96,6 +96,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\ConnectionsModel.cs" />
+    <Compile Include="Templates\ItemTemplateSelector.cs" />
     <Compile Include="ViewModels\ConnectionsViewModel.cs" />
     <Compile Include="ViewModels\ConnectViewModel.cs" />
     <Compile Include="ViewModels\RemoteDesktopViewModel.cs" />
@@ -191,6 +192,21 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\list-add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\folder-new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\list-remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\network-workgroup.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

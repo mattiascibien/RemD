@@ -45,7 +45,6 @@ namespace RemD.ViewModels
             if(close)
             {
                 RemoteDesktopView View = GetView() as RemoteDesktopView;
-                View.RDPControl.ActiveX.Disconnect();
             }
 
             base.OnDeactivate(close);

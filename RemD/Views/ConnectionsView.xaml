@@ -3,15 +3,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:m="clr-namespace:RemD.Models"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:templates="clr-namespace:RemD.Templates"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TreeView ItemsSource="{Binding Connections.RootCategories}">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Connections}">
-                    <TextBlock Text="{Binding Name}" />
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>  
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ToolBar Grid.Row="0" Background="{x:Null}">
+            <Button x:Name="AddNewCategory">
+                <Image Source="/RemD;component/Assets/folder-new.png" ></Image>
+            </Button>
+            <Button x:Name="AddNewConnection">
+                <Image Source="/RemD;component/Assets/list-add.png" ></Image>
+            </Button>
+            <Button>
+                <Image Source="/RemD;component/Assets/list-remove.png" ></Image>
+            </Button>
+        </ToolBar>
+        <TreeView Grid.Row="1" ItemsSource="{Binding Connections.RootCategories}" ItemTemplateSelector="{DynamicResource ItemTemplateSelector}">
+            <TreeView.Resources>
+                <templates:ItemTemplateSelector x:Key="ItemTemplateSelector">
+                    <templates:ItemTemplateSelector.CategoryTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type m:Category}" ItemsSource="{Binding Connections}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="12" Height="12" Source="/RemD;component/Assets/folder.png" />
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </templates:ItemTemplateSelector.CategoryTemplate>
+                    <templates:ItemTemplateSelector.ConnectionTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type m:Connection}">
+                            <Control>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDoubleClick">
+                                        <cal:ActionMessage MethodName="Open">
+                                            <cal:Parameter Value="$dataContext" />
+                                        </cal:ActionMessage>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Control.Template>
+                                    <ControlTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Width="12" Height="12" Source="/RemD;component/Assets/network-workgroup.png" />
+                                            <TextBlock Text="{Binding Name}" />
+                                        </StackPanel>
+                                    </ControlTemplate>
+                                </Control.Template>
+                            </Control>
+                        </HierarchicalDataTemplate>
+                    </templates:ItemTemplateSelector.ConnectionTemplate>
+                </templates:ItemTemplateSelector>
+            </TreeView.Resources>
+        </TreeView>
     </Grid>
 </UserControl>

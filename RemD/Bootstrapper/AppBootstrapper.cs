@@ -41,7 +41,7 @@ namespace RemD.Bootstrapper
 
             container.Singleton<IWindowManager, WindowManager>();
             container.Singleton<IEventAggregator, EventAggregator>();
-            container.PerRequest<IShell, ShellViewModel>();
+            container.Singleton<ShellViewModel>();
         }
 
         protected override object GetInstance(Type service, string key)
@@ -65,7 +65,7 @@ namespace RemD.Bootstrapper
 
         protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
         {
-            DisplayRootViewFor<IShell>();
+            DisplayRootViewFor<ShellViewModel>();
         }
     }
 }

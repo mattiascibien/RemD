@@ -24,10 +24,11 @@ namespace RemD.Models
         public ConnectionsModel()
         {
             RootCategories = new ObservableCollection<Category>();
-            Uncategorized = new Category();
-            Uncategorized.Name = "Uncategorized";
+            var cat = new Category();
+            cat.Name = "Uncategorized";
 
-            RootCategories.Add(Uncategorized);
+            RootCategories.Add(cat);
+            Uncategorized = cat;
         }
     }
 }
