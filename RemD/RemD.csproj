@@ -91,6 +91,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviours\BindableSelectedItemBehavior.cs" />
     <Compile Include="Bootstrapper\AppBootstrapper.cs" />
     <Compile Include="Interfaces\IShell.cs" />
     <Compile Include="Interop\RDPControl.cs">
@@ -100,6 +101,7 @@
       <DependentUpon>RDPControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\ConnectionsModel.cs" />
     <Compile Include="Templates\ItemTemplateSelector.cs" />

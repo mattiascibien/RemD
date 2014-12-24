@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RemD.ViewModels
 {
@@ -27,8 +28,8 @@ namespace RemD.ViewModels
             Load();
         }
 
-        private object _selectedItem;
-        public object SelectedItem
+        private Common _selectedItem;
+        public Common SelectedItem
         {
             get
             {
@@ -84,6 +85,36 @@ namespace RemD.ViewModels
         public void AddNewCategory()
         {
             
+        }
+
+
+        public void RemoveSelected()
+        {
+            if(SelectedItem is Category)
+            {
+                if ((SelectedItem as Category).Name == "Uncategorized")
+                {
+                    MessageBox.Show("Cannot delete default category", "RemD - Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
+                else
+                {
+                    if (MessageBox.Show("Are you sure you want do delete the category and all its connections?", "RemD", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    {
+                        (SelectedItem as Category).Connections.Clear();
+                        Connections.RootCategories.Remove(SelectedItem as Category);
+                    }
+                }
+            }
+            else //SelectedItem is Connection
+            {
+                foreach (var cat  in Connections.RootCategories)
+                {
+                    if(cat.Connections.Contains(SelectedItem as Connection))
+                    {
+                        cat.Connections.Remove(SelectedItem as Connection);
+                    }
+                }
+            }
         }
     }
 }
