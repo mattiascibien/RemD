@@ -92,6 +92,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Behaviours\BindableSelectedItemBehavior.cs" />
+    <Compile Include="Behaviours\CloseOnDisconnectBehavior.cs" />
     <Compile Include="Bootstrapper\AppBootstrapper.cs" />
     <Compile Include="Interfaces\IShell.cs" />
     <Compile Include="Interop\RDPControl.cs">
