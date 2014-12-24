@@ -6,15 +6,9 @@ using System.Text;
 
 namespace RemD.Models
 {
-    public class Category
+    public class Category : Common
     {
         public ObservableCollection<Connection> Connections
-        {
-            get;
-            set;
-        }
-
-        public string Name
         {
             get;
             set;

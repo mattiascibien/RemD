@@ -21,11 +21,11 @@
             <Button x:Name="AddNewConnection">
                 <Image Source="/RemD;component/Assets/list-add.png" ></Image>
             </Button>
-            <Button>
+            <Button x:Name="RemoveSelected">
                 <Image Source="/RemD;component/Assets/list-remove.png" ></Image>
             </Button>
         </ToolBar>
-        <TreeView Grid.Row="1" ItemsSource="{Binding Connections.RootCategories}" ItemTemplateSelector="{DynamicResource ItemTemplateSelector}">
+        <TreeView Grid.Row="1" ItemsSource="{Binding Connections.RootCategories}" SelectedItem="{Binding SelectedItem}" ItemTemplateSelector="{DynamicResource ItemTemplateSelector}">
             <TreeView.Resources>
                 <templates:ItemTemplateSelector x:Key="ItemTemplateSelector">
                     <templates:ItemTemplateSelector.CategoryTemplate>

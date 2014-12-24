@@ -5,9 +5,8 @@ using System.Text;
 
 namespace RemD.Models
 {
-    public class Connection
+    public class Connection : Common
     {
-        public string Name { get; set; }
         public string Address { get; set; }
     }
 }

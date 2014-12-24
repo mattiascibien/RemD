@@ -27,6 +27,22 @@ namespace RemD.ViewModels
             Load();
         }
 
+        private object _selectedItem;
+        public object SelectedItem
+        {
+            get
+            {
+                return _selectedItem;
+            }
+            set
+            {
+                if(_selectedItem != value)
+                {
+                    _selectedItem = value;
+                    NotifyOfPropertyChange(() => SelectedItem);
+                }
+            }
+        }
 
         public void Load()
         {
